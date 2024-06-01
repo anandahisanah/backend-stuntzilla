@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/anandahisanah/backend-stunzilla/issues"
   },
-  "homepage": "https://github.com/anandahisanah/backend-stunzilla#readme"
+  "homepage": "https://github.com/anandahisanah/backend-stunzilla#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
 }
