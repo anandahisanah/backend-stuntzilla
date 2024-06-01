@@ -1,0 +1,20 @@
+{
+  "name": "backend-stunzilla",
+  "version": "1.0.0",
+  "description": "backend-stunzilla",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anandahisanah/backend-stunzilla.git"
+  },
+  "author": "stuntzilla",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anandahisanah/backend-stunzilla/issues"
+  },
+  "homepage": "https://github.com/anandahisanah/backend-stunzilla#readme"
+}
