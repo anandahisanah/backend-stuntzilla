@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://hai-hai-123.firebaseio.com/databases/stuntzilla"
+    databaseURL: "https://test-stuntzilla-default-rtdb.asia-southeast1.firebasedatabase.app/backend-api"
 });
 
 const db = admin.firestore();
@@ -168,6 +168,11 @@ app.get('/user/:user_id/child/:child_id', async (req, res) => {
             message: 'Error getting child data',
         });
     }
+});
+
+// dashboard
+app.get('/dashboard', (req, res) => {
+    res.send('Dashboard STUNTZILLA');
 });
 
 app.listen(3000, () => {
