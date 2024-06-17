@@ -170,6 +170,11 @@ app.get('/user/:user_id/child/:child_id', async (req, res) => {
     }
 });
 
+// dashboard
+app.get('/dashboard', (req, res) => {
+    res.send('Dashboard STUNTZILLA');
+});
+
 app.listen(3000, () => {
     console.log('Server listening on port 3000');
 });
