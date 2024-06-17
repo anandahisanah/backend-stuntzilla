@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://hai-hai-123.firebaseio.com/databases/stuntzilla"
+    databaseURL: "https://test-stuntzilla-default-rtdb.asia-southeast1.firebasedatabase.app/backend-api"
 });
 
 const db = admin.firestore();
