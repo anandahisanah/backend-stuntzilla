@@ -63,6 +63,7 @@ app.post('/user/store', async (req, res) => {
         res.status(500).json({
             status: 'failed',
             message: 'Error creating user',
+            error: error.message,
         });
     }
 });
@@ -93,6 +94,7 @@ app.get('/user/:user_id', async (req, res) => {
         res.status(500).json({
             status: 'failed',
             message: 'Error getting user data',
+            error: error.message,
         });
     }
 });
@@ -118,6 +120,8 @@ app.post('/child/store', async (req, res) => {
             user_id: user.uid,
             fullname: fullname,
             birthdate: birthdate,
+            category_stunting: '',
+            messsage_stunting: '',
             created_at: admin.firestore.FieldValue.serverTimestamp()
         });
 
@@ -136,6 +140,7 @@ app.post('/child/store', async (req, res) => {
         res.status(500).json({
             status: 'failed',
             message: 'Error creating child',
+            error: error.message,
         });
     }
 });
@@ -168,6 +173,8 @@ app.post('/child/:child_id', async (req, res) => {
                 child_id: child_id,
                 nickname: child_doc.data().nickname,
                 fullname: child_doc.data().fullname,
+                category_stunting: child_doc.data().category_stunting,
+                message_stunting: child_doc.data().message_stunting,
                 email: child_doc.data().email,
             },
         });
@@ -176,6 +183,7 @@ app.post('/child/:child_id', async (req, res) => {
         res.status(500).json({
             status: 'failed',
             message: 'Error getting child data',
+            error: error.message,
         });
     }
 });
@@ -188,6 +196,7 @@ app.get('/stunting', async (req, res) => {
         const endpoint_id = process.env.ENDPOINT_ID;
 
         // request
+        const child_id = req.query.child_id;
         const gender = Number(req.query.gender);
         const age = Number(req.query.age);
         const birth_weight = Number(req.query.birth_weight);
@@ -224,6 +233,13 @@ app.get('/stunting', async (req, res) => {
             message = 'Anak terdeteksi stunting. Pastikan nutrisi seimbang dan asupan kalori mencukupi. Fokus pada makanan tinggi protein seperti telur, produk susu, dan kacang-kacangan. Konsultasikan dengan penyedia layanan kesehatan untuk penilaian lebih lanjut.';
         }
 
+        // save it into database
+        await db.collection('childs').doc(child_id).set({
+            category_stunting: category,
+            message_stunting: message,
+            updated_at: admin.firestore.FieldValue.serverTimestamp()
+        }, { merge: true });
+
         res.status(200).json({
             status: 'success',
             data: {
@@ -232,7 +248,12 @@ app.get('/stunting', async (req, res) => {
             },
         });
     } catch (error) {
-        console.error('errror', error.message)
+        console.error('Error getting Stunting data:', error);
+        res.status(500).json({
+            status: 'failed',
+            message: 'Error getting Stunting data',
+            error: error.message,
+        });
     }
 });
 
